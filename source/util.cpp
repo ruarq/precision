@@ -5,7 +5,7 @@ namespace precision
 
 auto validate_unit(const std::string &unit) -> bool
 {
-	const auto units = { "ns", "us", "ms", "s", "min", "h", "auto" };
+	const auto units = { "ns", "us", "ms", "s", "min", "h" };
 	for (auto other : units)
 	{
 		if (unit == other)

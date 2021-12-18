@@ -7,34 +7,6 @@ auto format_time(const int64_t ns, std::string unit) -> std::string
 {
 	std::ostringstream out;
 
-	if (unit == "auto")
-	{
-		if (ns / h_to_ns > 0)
-		{
-			unit = "h";
-		}
-		else if (ns / min_to_ns > 0)
-		{
-			unit = "min";
-		}
-		else if (ns / s_to_ns > 0)
-		{
-			unit = "s";
-		}
-		else if (ns / ms_to_ns > 0)
-		{
-			unit = "ms";
-		}
-		else if (ns / us_to_ns > 0)
-		{
-			unit = "us";
-		}
-		else
-		{
-			unit = "ns";
-		}
-	}
-
 	if (unit == "h")
 	{
 		out << std::setprecision(1) << ((float)(ns * ns_to_h));
