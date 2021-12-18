@@ -26,10 +26,10 @@ struct benchmark_config final
  */
 struct benchmark final
 {
-	benchmark(const char *name, func fn);
+	benchmark(const char *name, func run);
 
 	const char *name;
-	func fn;
+	func run;
 };
 
 /**

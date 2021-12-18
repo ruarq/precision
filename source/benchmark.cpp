@@ -5,7 +5,7 @@ namespace precision
 
 benchmark::benchmark(const char *name, func fn)
 	: name(name)
-	, fn(fn)
+	, run(fn)
 {
 }
 
