@@ -20,14 +20,19 @@ auto main(int argc, char **argv, const std::vector<benchmark> &benchmarks) -> in
 		switch (opt)
 		{
 			case 't':
-				config.min_runtime = std::stoull(optarg);
+				config.min_runtime = to_ns(optarg);
+				if (config.min_runtime == std::numeric_limits<int64_t>::infinity())
+				{
+					std::cout << argv[0] << ": invalid argument for option '" << optopt << "'\n";
+					return 1;
+				}
 				break;
 
 			case 'u':
 				config.unit = optarg;
 				if (!validate_unit(config.unit))
 				{
-					std::cout << argv[0] << "u" << " invalid value for option '--" << long_options[option_index].name << "'\n";
+					std::cout << argv[0] << ": invalid argument for option '" << optopt << "'\n";
 					return 1;
 				}
 				break;
