@@ -1,5 +1,4 @@
 bin
-*.cpp
 .vscode
 *.make
 Makefile
