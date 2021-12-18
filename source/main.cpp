@@ -20,7 +20,7 @@ auto main(int argc, char **argv, const std::vector<benchmark> &benchmarks) -> in
 		switch (opt)
 		{
 			case 't':
-				config.min_runtime = to_ns(optarg);
+				config.min_runtime = parse_runtime(optarg);
 				if (config.min_runtime == std::numeric_limits<int64_t>::infinity())
 				{
 					std::cout << argv[0] << ": invalid argument for option '" << optopt << "'\n";

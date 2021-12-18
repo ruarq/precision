@@ -22,9 +22,9 @@ auto validate_unit(const std::string &unit) -> bool;
 auto parse_unit(const std::string &s) -> std::string;
 
 /**
- * @brief takes any "time string" and returns the given time in nanoseconds
+ * @brief takes any "runtime string" and returns the given time in nanoseconds
  * @return time in ns or infinity if @p s is not valid
  */
-auto to_ns(const std::string &s) -> int64_t;
+auto parse_runtime(const std::string &s) -> int64_t;
 
 }

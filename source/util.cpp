@@ -30,7 +30,7 @@ auto parse_unit(const std::string &s) -> std::string
 	}
 }
 
-auto to_ns(const std::string &s) -> int64_t
+auto parse_runtime(const std::string &s) -> int64_t
 {
 	const auto value = std::stof(s);
 	const auto unit = parse_unit(s);
