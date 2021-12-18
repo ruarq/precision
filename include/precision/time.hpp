@@ -22,7 +22,7 @@ static constexpr float ns_to_h			= 1.0f / (float)(h_to_ns);
  * @brief time the runtime of a function
  */
 template<typename Fn, typename... Args>
-int64_t time(Fn fn, Args&&... args)
+auto time(Fn fn, Args&&... args) -> int64_t
 {
 	auto start = std::chrono::high_resolution_clock::now();
 	fn(args...);
