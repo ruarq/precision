@@ -6,6 +6,8 @@ project "precision"
 	language "C++"
 	warnings "Extra"
 
+	cppdialect "C++17"
+
 	targetdir "bin/%{cfg.buildcfg}"
 	objdir "bin/obj"
 
