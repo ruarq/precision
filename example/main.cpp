@@ -44,8 +44,8 @@ auto benchmarks = {
 	}
 };
 
-auto main(int argc, char **argv) -> int
+auto main() -> int
 {
 	std::srand(std::time(nullptr));
-	return precision::main(argc, argv, benchmarks);
+	return precision::main(benchmarks);
 }

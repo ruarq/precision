@@ -3,7 +3,7 @@
 namespace precision
 {
 
-auto main(int argc, char **argv, const std::vector<benchmark> &benchmarks) -> int
+auto main(const std::vector<benchmark> &benchmarks) -> int
 {
 	std::cout << std::setw(15) << "Benchmark";
 	std::cout << std::setw(15) << "Min";
