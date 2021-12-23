@@ -9,7 +9,7 @@
 namespace precision
 {
 
-static constexpr auto default_runtime = std::chrono::milliseconds(100);
+static constexpr auto default_runtime = std::chrono::seconds(1);
 
 struct benchmark_config final
 {

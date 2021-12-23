@@ -1,5 +1,5 @@
-#include <iostream>
-#include <cmath>
+#include <vector>
+#include <list>
 
 #include <precision/precision.hpp>
 
@@ -17,29 +17,25 @@ auto round_math(float num) -> float
 
 auto benchmarks = {
 	precision::benchmark {
-		"std-round",
+		"list-insert",
 		[](auto &s) {
+			std::list<int> l;
 			while (s.running())
 			{
-				std::round(random_float(10000));
+				l.insert(l.end(), 69);
 			}
-		},
-		{
-			.runtime = std::chrono::seconds(1)
 		}
 	},
 
 	precision::benchmark {
-		"round-math",
+		"vector-insert",
 		[](auto &s)
 		{
+			std::vector<int> v;
 			while (s.running())
 			{
-				round_math(random_float(10000));
+				v.insert(v.end(), 420);
 			}
-		},
-		{
-			.runtime = std::chrono::seconds(1)
 		}
 	}
 };

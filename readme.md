@@ -18,7 +18,7 @@ precision::benchmark vector_insert {
 		while (s.running())
 		{
 			// in this case let's test how fast it is to insert a element into a std::vector
-			v.insert(0);
+			v.insert(v.begin(), 0);
 		}
 	}
 }
