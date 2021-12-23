@@ -1,7 +1,5 @@
 #include "precision/state.hpp"
 
-#include <iostream> // remove
-
 namespace precision
 {
 
@@ -35,6 +33,26 @@ auto state::running() -> bool
 			return false;
 		}
 	}
+}
+
+auto state::sample_count() const -> size_t
+{
+	return samples.size();
+}
+
+auto state::min() const -> clock::duration
+{
+	return *std::min_element(samples.begin(), samples.end());
+}
+
+auto state::mean() const -> clock::duration
+{
+	return average(samples.begin(), samples.end());
+}
+
+auto state::max() const -> clock::duration
+{
+	return *std::max_element(samples.begin(), samples.end());
 }
 
 }

@@ -1,7 +1,9 @@
 #pragma once
 
 #include <string>
+#include <chrono>
 
+#include "clock.hpp"
 #include "state.hpp"
 
 namespace precision
@@ -13,11 +15,13 @@ public:
 	using function = void(*)(state&);
 
 public:
-	benchmark(const std::string &name, function run);
+	benchmark(const std::string &name, function run, const clock::duration &runtime = std::chrono::milliseconds(100));
 
 public:
 	const std::string name;
 	function run;
+	clock::duration runtime;
+
 };
 
 }
