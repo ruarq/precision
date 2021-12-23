@@ -9,13 +9,13 @@ Defining a benchmark is really easy:
 ```cpp
 precision::benchmark vector_insert {
 	"vector-insert",		// you give it a nice name
-	[](auto &s) {			// and a function, which will contain what you want to benchmark
+	[](auto &ctx) {			// and a function, which will contain what you want to benchmark
 		// here you can prepare your benchmark, by allocating memory or whatever you need to do
 		// ...
 		std::vector<int> v;
 
 		// this loop should contain everything which you want to benchmark
-		while (s.running())
+		while (ctx.running())
 		{
 			// in this case let's test how fast it is to insert a element into a std::vector
 			v.insert(v.begin(), 0);

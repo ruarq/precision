@@ -4,7 +4,7 @@
 #include <chrono>
 
 #include "clock.hpp"
-#include "state.hpp"
+#include "context.hpp"
 
 namespace precision
 {
@@ -19,7 +19,7 @@ struct benchmark_config final
 class benchmark final
 {
 public:
-	using function = void(*)(state&);
+	using function = void(*)(context&);
 
 public:
 	benchmark(const std::string &name, function run);

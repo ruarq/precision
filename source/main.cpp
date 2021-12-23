@@ -14,18 +14,18 @@ auto main(const std::vector<benchmark> &benchmarks) -> int
 
 	for (auto &[name, run, runtime] : benchmarks)
 	{
-		state s(runtime);
-		run(s);
+		context ctx(runtime);
+		run(ctx);
 
-		auto min = /* std::chrono::duration<float> */(s.min());
-		auto mean = /* std::chrono::duration<float> */(s.mean());
-		auto max = /* std::chrono::duration<float> */(s.max());
+		auto min = /* std::chrono::duration<float> */(ctx.min());
+		auto mean = /* std::chrono::duration<float> */(ctx.mean());
+		auto max = /* std::chrono::duration<float> */(ctx.max());
 
 		std::cout << std::setw(15) << name;
 		std::cout << std::setw(15) << min.count();
 		std::cout << std::setw(15) << mean.count();
 		std::cout << std::setw(15) << max.count();
-		std::cout << std::setw(15) << s.sample_count();
+		std::cout << std::setw(15) << ctx.sample_count();
 		std::cout << "\n";
 	}
 

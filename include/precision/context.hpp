@@ -13,10 +13,10 @@
 namespace precision
 {
 
-class state final
+class context final
 {
 public:
-	state(const clock::duration &min_runtime);
+	context(const clock::duration &min_runtime);
 
 public:
 	/**

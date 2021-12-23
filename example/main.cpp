@@ -1,5 +1,4 @@
-#include <vector>
-#include <list>
+#include <string>
 
 #include <precision/precision.hpp>
 
@@ -17,24 +16,23 @@ auto round_math(float num) -> float
 
 auto benchmarks = {
 	precision::benchmark {
-		"list-insert",
-		[](auto &s) {
-			std::list<int> l;
-			while (s.running())
+		"string-create",
+		[](auto &ctx) {
+			while (ctx.running())
 			{
-				l.insert(l.end(), 69);
+				std::string s;
 			}
 		}
 	},
 
 	precision::benchmark {
-		"vector-insert",
-		[](auto &s)
-		{
-			std::vector<int> v;
-			while (s.running())
+		"string-copy",
+		[](auto &ctx) {
+			std::string s = "Hello precision!";
+			
+			while (ctx.running())
 			{
-				v.insert(v.end(), 420);
+				auto copy = s;
 			}
 		}
 	}

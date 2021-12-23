@@ -1,14 +1,14 @@
-#include "precision/state.hpp"
+#include "precision/context.hpp"
 
 namespace precision
 {
 
-state::state(const clock::duration &min_runtime)
+context::context(const clock::duration &min_runtime)
 	: min_runtime(min_runtime)
 {
 }
 
-auto state::running() -> bool
+auto context::running() -> bool
 {
 	auto now = clock::now();
 
@@ -35,22 +35,22 @@ auto state::running() -> bool
 	}
 }
 
-auto state::sample_count() const -> size_t
+auto context::sample_count() const -> size_t
 {
 	return samples.size();
 }
 
-auto state::min() const -> clock::duration
+auto context::min() const -> clock::duration
 {
 	return *std::min_element(samples.begin(), samples.end());
 }
 
-auto state::mean() const -> clock::duration
+auto context::mean() const -> clock::duration
 {
 	return average(samples.begin(), samples.end());
 }
 
-auto state::max() const -> clock::duration
+auto context::max() const -> clock::duration
 {
 	return *std::max_element(samples.begin(), samples.end());
 }

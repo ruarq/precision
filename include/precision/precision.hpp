@@ -1,7 +1,7 @@
 #pragma once
 
 #include "benchmark.hpp"
-#include "state.hpp"
+#include "context.hpp"
 #include "main.hpp"
 #include "clock.hpp"
 #include "util.hpp"
