@@ -1,11 +1,10 @@
 #pragma once
 
 #include <iostream>
-#include <getopt.h>
+#include <iomanip>
+#include <vector>
 
 #include "benchmark.hpp"
-#include "write_formatted.hpp"
-#include "util.hpp"
 
 namespace precision
 {

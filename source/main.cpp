@@ -5,46 +5,29 @@ namespace precision
 
 auto main(int argc, char **argv, const std::vector<benchmark> &benchmarks) -> int
 {
-	benchmark_config config;
+	std::cout << std::setw(15) << "Benchmark";
+	std::cout << std::setw(15) << "Min";
+	std::cout << std::setw(15) << "Mean";
+	std::cout << std::setw(15) << "Max";
+	std::cout << std::setw(15) << "Samples";
+	std::cout << "\n";
 
-	const option long_options[] = {
-		{ "min-runtime",	required_argument,	nullptr, 't'	},
-		{ "unit",			required_argument,	nullptr, 'u'	},
-		{ nullptr,			0,					nullptr, 0		}
-	};
-
-	int opt;
-	int option_index;
-	while ((opt = getopt_long(argc, argv, "u:t:", long_options, &option_index)) != -1)
+	for (auto &[name, run, runtime] : benchmarks)
 	{
-		switch (opt)
-		{
-			case 't':
-				config.min_runtime = parse_runtime(optarg);
-				if (config.min_runtime == std::numeric_limits<int64_t>::infinity())
-				{
-					std::cout << argv[0] << ": invalid argument for option '" << optopt << "'\n";
-					return 1;
-				}
-				break;
+		state s(runtime);
+		run(s);
 
-			case 'u':
-				config.unit = optarg;
-				if (!validate_unit(config.unit))
-				{
-					std::cout << argv[0] << ": invalid argument for option '" << optopt << "'\n";
-					return 1;
-				}
-				break;
+		auto min = /* std::chrono::duration<float> */(s.min());
+		auto mean = /* std::chrono::duration<float> */(s.mean());
+		auto max = /* std::chrono::duration<float> */(s.max());
 
-			case '?':
-			default:
-				return 1;
-		}
+		std::cout << std::setw(15) << name;
+		std::cout << std::setw(15) << min.count();
+		std::cout << std::setw(15) << mean.count();
+		std::cout << std::setw(15) << max.count();
+		std::cout << std::setw(15) << s.sample_count();
+		std::cout << "\n";
 	}
-
-	auto results = run(benchmarks, config);
-	write_formatted(std::cout, results, config);
 
 	return 0;
 }

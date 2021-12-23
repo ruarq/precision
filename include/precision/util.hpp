@@ -1,30 +1,22 @@
 #pragma once
 
-#include <string>
-#include <initializer_list>
-#include <regex>
-#include <limits>
-
-#include "time.hpp"
+#include <iterator>
 
 namespace precision
 {
 
-/**
- * @brief check if a string is a supported unit
- */
-auto validate_unit(const std::string &unit) -> bool;
+template<typename Iter>
+auto average(Iter begin, Iter end)
+{
+	auto sum = *begin;
+	auto size = std::distance(begin, end);
 
-/**
- * @brief parse a unit from a string.
- * the format of @p s is expected to match the regex /^\d\d*(\.\d\d*)?[a-z]*$/g
- */
-auto parse_unit(const std::string &s) -> std::string;
+	for (; begin != end; ++begin)
+	{
+		sum += *begin;
+	}
 
-/**
- * @brief takes any "runtime string" and returns the given time in nanoseconds
- * @return time in ns or infinity if @p s is not valid
- */
-auto parse_runtime(const std::string &s) -> int64_t;
+	return sum / size;
+}
 
 }
