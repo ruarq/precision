@@ -3,10 +3,17 @@
 namespace precision
 {
 
-benchmark::benchmark(const std::string &name, function run, const clock::duration &runtime)
+benchmark::benchmark(const std::string &name, function run)
 	: name(name)
 	, run(run)
-	, runtime(runtime)
+	, runtime(default_runtime)
+{
+}
+
+benchmark::benchmark(const std::string &name, function run, const benchmark_config &cfg)
+	: name(name)
+	, run(run)
+	, runtime(cfg.runtime)
 {
 }
 

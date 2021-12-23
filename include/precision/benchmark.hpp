@@ -9,13 +9,21 @@
 namespace precision
 {
 
+static constexpr auto default_runtime = std::chrono::milliseconds(100);
+
+struct benchmark_config final
+{
+	clock::duration runtime = default_runtime;
+};
+
 class benchmark final
 {
 public:
 	using function = void(*)(state&);
 
 public:
-	benchmark(const std::string &name, function run, const clock::duration &runtime = std::chrono::milliseconds(100));
+	benchmark(const std::string &name, function run);
+	benchmark(const std::string &name, function run, const benchmark_config &cfg);
 
 public:
 	const std::string name;

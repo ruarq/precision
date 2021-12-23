@@ -23,6 +23,9 @@ auto benchmarks = {
 			{
 				std::round(random_float(10000));
 			}
+		},
+		{
+			.runtime = std::chrono::seconds(1)
 		}
 	},
 
@@ -34,6 +37,9 @@ auto benchmarks = {
 			{
 				round_math(random_float(10000));
 			}
+		},
+		{
+			.runtime = std::chrono::seconds(1)
 		}
 	}
 };
