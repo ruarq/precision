@@ -28,8 +28,29 @@ The easiest way to get a result for that benchmark, is to pass it over to the `p
 ```cpp
 int main()
 {
-	// ...
-
 	return preicision::main({ vector_insert });
+}
+```
+
+This makes defining a bunch of benchmarks really easy:
+```cpp
+auto benchmarks = {
+	precision::benchmark {
+		// ...
+	},
+	precision::benchmark {
+		// ...
+	},
+	precision::benchmark {
+		// ...
+	}
+};
+```
+
+and now just pass them to `precision::main()`:
+```cpp
+int main()
+{
+	return precision::main(benchmarks);
 }
 ```
