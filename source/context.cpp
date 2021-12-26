@@ -4,7 +4,8 @@ namespace precision
 {
 
 context::context(const clock::duration &min_runtime)
-	: min_runtime(min_runtime)
+	: current_runtime(std::chrono::nanoseconds(0))
+	, min_runtime(min_runtime)
 {
 }
 
@@ -14,17 +15,19 @@ auto context::running() -> bool
 
 	if (first_run)
 	{
-		start = last = clock::now();
 		first_run = false;
+		start = last = clock::now();
 		return true;
 	}
 	else
 	{
-		samples.push_back(now - last);
+		current_runtime += now - last;
+		samples.push_back(current_runtime);
 		
 		auto total_runtime = now - start;
 		if (total_runtime < min_runtime)
 		{
+			current_runtime = std::chrono::nanoseconds(0);
 			last = clock::now();
 			return true;
 		}
@@ -53,6 +56,25 @@ auto context::mean() const -> clock::duration
 auto context::max() const -> clock::duration
 {
 	return *std::max_element(samples.begin(), samples.end());
+}
+
+auto context::pause() -> void
+{
+	auto now = clock::now();
+	if (!paused)
+	{
+		current_runtime += now - last;
+		paused = true;
+	}
+}
+
+auto context::resume() -> void
+{
+	if (paused)
+	{
+		paused = false;
+		last = clock::now();
+	}
 }
 
 }

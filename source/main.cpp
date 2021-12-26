@@ -6,9 +6,9 @@ namespace precision
 auto main(const std::vector<benchmark> &benchmarks) -> int
 {
 	std::cout << std::setw(15) << "Benchmark";
-	std::cout << std::setw(15) << "Min";
-	std::cout << std::setw(15) << "Mean";
-	std::cout << std::setw(15) << "Max";
+	std::cout << std::setw(20) << "Min";
+	std::cout << std::setw(20) << "Mean";
+	std::cout << std::setw(20) << "Max";
 	std::cout << std::setw(15) << "Samples";
 	std::cout << "\n";
 
@@ -22,9 +22,9 @@ auto main(const std::vector<benchmark> &benchmarks) -> int
 		auto max = /* std::chrono::duration<float> */(ctx.max());
 
 		std::cout << std::setw(15) << name;
-		std::cout << std::setw(15) << min.count();
-		std::cout << std::setw(15) << mean.count();
-		std::cout << std::setw(15) << max.count();
+		std::cout << std::setw(20) << min.count();
+		std::cout << std::setw(20) << mean.count();
+		std::cout << std::setw(20) << max.count();
 		std::cout << std::setw(15) << ctx.sample_count();
 		std::cout << "\n";
 	}

@@ -44,11 +44,23 @@ public:
 	 */
 	auto max() const -> clock::duration;
 
+	/**
+	 * @brief pause timing
+	 */
+	auto pause() -> void;
+
+	/**
+	 * @brief resume timing
+	 */
+	auto resume() -> void;
+
 private:
 	bool first_run = true;
 	std::vector<clock::duration> samples;
 	clock::time_point last, start;
+	clock::duration current_runtime;
 	clock::duration min_runtime;
+	bool paused = false;
 };
 
 }
