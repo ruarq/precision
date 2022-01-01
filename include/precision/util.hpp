@@ -19,4 +19,15 @@ auto average(Iter begin, Iter end)
 	return sum / size;
 }
 
+template <class T>
+auto dont_optimize(T& value) -> void
+{
+	#if not defined(__clang__)
+		asm volatile("" : "+m,r"(value) : : "memory");
+	#else
+		asm volatile("" : "+r,m"(value) : : "memory");
+	#endif
+}
+
+
 }
