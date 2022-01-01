@@ -22,7 +22,7 @@ auto benchmarks = {
 				std::sort(v.begin(), v.end());
 			}
 		}
-	}
+	}.time(std::chrono::seconds(10))
 };
 
 auto main() -> int
