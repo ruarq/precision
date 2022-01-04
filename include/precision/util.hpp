@@ -1,6 +1,11 @@
 #pragma once
 
 #include <iterator>
+#include <string>
+#include <chrono>
+
+#include "clock.hpp"
+#include "unit.hpp"
 
 namespace precision
 {
@@ -29,5 +34,6 @@ auto dont_optimize(T& value) -> void
 	#endif
 }
 
+auto format_string(const duration &dur, const unit u) -> std::string;
 
 }

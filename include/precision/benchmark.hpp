@@ -5,6 +5,7 @@
 
 #include "clock.hpp"
 #include "context.hpp"
+#include "unit.hpp"
 
 namespace precision
 {
@@ -20,12 +21,14 @@ public:
 	benchmark(const std::string &name, function run);
 
 public:
-	auto time(const clock::duration &dur) -> benchmark&;
+	auto time(const duration &dur) -> benchmark&;
+	auto precision(const unit u) -> benchmark&;
 
 public:
 	const std::string name;
 	function run;
-	clock::duration run_duration;
+	duration run_duration;
+	unit target_unit = unit::ns;
 };
 
 }

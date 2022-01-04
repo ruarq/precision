@@ -16,7 +16,7 @@ namespace precision
 class context final
 {
 public:
-	context(const clock::duration &min_runtime);
+	context(const duration &min_runtime);
 
 public:
 	/**
@@ -32,17 +32,17 @@ public:
 	/**
 	 * @brief get the minimum sample
 	 */
-	auto min() const -> clock::duration;
+	auto min() const -> duration;
 
 	/**
 	 * @brief get the mean sample
 	 */
-	auto mean() const -> clock::duration;
+	auto mean() const -> duration;
 
 	/**
 	 * @brief get the maximum sample
 	 */
-	auto max() const -> clock::duration;
+	auto max() const -> duration;
 
 	/**
 	 * @brief pause timing
@@ -56,10 +56,10 @@ public:
 
 private:
 	bool first_run = true;
-	std::vector<clock::duration> samples;
+	std::vector<duration> samples;
 	clock::time_point last, start;
-	clock::duration current_runtime;
-	clock::duration min_runtime;
+	duration current_runtime;
+	duration min_runtime;
 	bool paused = false;
 };
 

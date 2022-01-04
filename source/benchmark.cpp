@@ -10,9 +10,15 @@ benchmark::benchmark(const std::string &name, function run)
 {
 }
 
-auto benchmark::time(const clock::duration &dur) -> benchmark&
+auto benchmark::time(const duration &dur) -> benchmark&
 {
 	run_duration = dur;
+	return *this;
+}
+
+auto benchmark::precision(const unit u) -> benchmark&
+{
+	target_unit = u;
 	return *this;
 }
 

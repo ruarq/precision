@@ -3,7 +3,7 @@
 namespace precision
 {
 
-context::context(const clock::duration &min_runtime)
+context::context(const duration &min_runtime)
 	: current_runtime(std::chrono::nanoseconds(0))
 	, min_runtime(min_runtime)
 {
@@ -43,17 +43,17 @@ auto context::sample_count() const -> size_t
 	return samples.size();
 }
 
-auto context::min() const -> clock::duration
+auto context::min() const -> duration
 {
 	return *std::min_element(samples.begin(), samples.end());
 }
 
-auto context::mean() const -> clock::duration
+auto context::mean() const -> duration
 {
 	return average(samples.begin(), samples.end());
 }
 
-auto context::max() const -> clock::duration
+auto context::max() const -> duration
 {
 	return *std::max_element(samples.begin(), samples.end());
 }

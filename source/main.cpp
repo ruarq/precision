@@ -21,19 +21,15 @@ auto main(const std::vector<benchmark> &benchmarks) -> int
 	std::cout << std::setw(15) << "Samples";
 	std::cout << "\n";
 
-	for (auto &[name, run, runtime] : benchmarks)
+	for (auto &bench : benchmarks)
 	{
-		context ctx(runtime);
-		run(ctx);
+		context ctx(bench.run_duration);
+		bench.run(ctx);
 
-		auto min = ctx.min();
-		auto mean = ctx.mean();
-		auto max = ctx.max();
-
-		std::cout << std::setw(maxw) << name;
-		std::cout << std::setw(20) << min.count();
-		std::cout << std::setw(20) << mean.count();
-		std::cout << std::setw(20) << max.count();
+		std::cout << std::setw(maxw) << bench.name;
+		std::cout << std::setw(20) << format_string(ctx.min(), bench.target_unit);
+		std::cout << std::setw(20) << format_string(ctx.mean(), bench.target_unit);
+		std::cout << std::setw(20) << format_string(ctx.max(), bench.target_unit);
 		std::cout << std::setw(15) << ctx.sample_count();
 		std::cout << "\n";
 	}

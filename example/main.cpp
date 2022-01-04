@@ -26,7 +26,7 @@ auto benchmarks = {
 				std::sort(v.begin(), v.end());
 			}
 		}
-	},
+	}.precision(precision::unit::us),
 
 	/**
 	 * list-sort
@@ -49,7 +49,7 @@ auto benchmarks = {
 				l.sort();
 			}
 		}
-	}
+	}.precision(precision::unit::us)
 };
 
 auto main() -> int
