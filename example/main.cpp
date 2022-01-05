@@ -32,7 +32,7 @@ auto benchmarks = {
 				std::sort(v.begin(), v.end());
 			}
 		}
-	},
+	}.time(std::chrono::seconds(10)),
 
 	/**
 	 * list-sort
@@ -127,7 +127,7 @@ auto benchmarks = {
 	}
 };
 
-auto main() -> int
+auto main(int argc, char **argv) -> int
 {
-	return precision::main(benchmarks);
+	return precision::main(benchmarks, argc, argv);
 }

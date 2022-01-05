@@ -3,8 +3,89 @@
 namespace precision
 {
 
-auto main(const std::vector<benchmark> &benchmarks) -> int
+auto main(std::vector<benchmark> benchmarks, const int argc, char **argv) -> int
 {
+	const option long_options[] = {
+		{ "time",		required_argument,	nullptr, 't' },
+		{ "precision",	required_argument,	nullptr, 'p' },
+		{ nullptr,		0,					nullptr,  0  }
+	};
+
+	int opt;
+	int long_opt_index;
+	while ((opt = getopt_long(argc, argv, "t:p:", long_options, &long_opt_index)) != -1)
+	{
+		switch (opt)
+		{
+			case 't':
+			{	size_t sz;
+				auto time = std::stof(optarg, &sz);
+				auto unit = from_string(std::string(optarg).substr(sz));
+
+				for (auto &bench : benchmarks)
+				{
+					if (bench.custom_time)
+					{
+						continue;
+					}
+
+					switch (unit)
+					{
+						case unit::ns:
+							bench.time(std::chrono::nanoseconds(int64_t(time)));
+							break;
+
+						case unit::us:
+							bench.time(std::chrono::microseconds(int64_t(time)));
+							break;
+
+						case unit::ms:
+							bench.time(std::chrono::milliseconds(int64_t(time)));
+							break;
+
+						case unit::s:
+							bench.time(std::chrono::duration_cast<precision::duration>(
+								std::chrono::duration<float>(time)));
+							break;
+						
+						case unit::min:
+							bench.time(std::chrono::duration_cast<precision::duration>(
+								std::chrono::duration<float, std::ratio<60>>(time)));
+							break;
+
+						case unit::h:
+							bench.time(std::chrono::duration_cast<precision::duration>(
+								std::chrono::duration<float, std::ratio<3600>>(time)));
+							break;
+
+						case unit::none:
+						default:
+							throw std::runtime_error("invalid argument for option -t/--time");
+					}
+				}
+			}
+			break;
+
+			case 'p':
+			{
+				auto unit = from_string(optarg);
+				for (auto &bench : benchmarks)
+				{
+					if (!bench.custom_precision)
+					{
+						bench.precision(unit);
+					}
+				}
+			}
+			break;
+
+			case 'h':
+			default:
+				// TODO(ruarq): print help stuff
+				return 1;
+		}
+	}
+
 	// find the benchmark with the longest name
 	auto maxw = std::max_element(benchmarks.begin(), benchmarks.end(), [](const benchmark &a, const benchmark &b)
 	{

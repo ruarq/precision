@@ -27,8 +27,11 @@ public:
 public:
 	const std::string name;
 	function run;
-	duration run_duration;
+	duration run_duration = default_runtime;
 	unit target_unit = unit::ns;
+
+	bool custom_time = false;
+	bool custom_precision = false;
 };
 
 }

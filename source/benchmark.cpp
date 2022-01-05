@@ -6,18 +6,19 @@ namespace precision
 benchmark::benchmark(const std::string &name, function run)
 	: name(name)
 	, run(run)
-	, run_duration(default_runtime)
 {
 }
 
 auto benchmark::time(const duration &dur) -> benchmark&
 {
+	custom_time = true;
 	run_duration = dur;
 	return *this;
 }
 
 auto benchmark::precision(const unit u) -> benchmark&
 {
+	custom_precision = true;
 	target_unit = u;
 	return *this;
 }
