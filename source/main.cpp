@@ -89,34 +89,25 @@ auto main(std::vector<benchmark> benchmarks, const int argc, char **argv) -> int
 		}
 	}
 
-	// find the benchmark with the longest name
-	auto maxw = std::max_element(benchmarks.begin(), benchmarks.end(), [](const benchmark &a, const benchmark &b)
-	{
-		return a.name.size() < b.name.size();
-	})->name.size();
+	std::vector<benchmark_result> results;
 
-	// maxw only >= 15
-	maxw = std::max(maxw, (size_t)(15));
+	// warm up the processor
+	run_empty_bench();
 
-	std::cout << std::setw(maxw) << "Benchmark";
-	std::cout << std::setw(20) << "Min";
-	std::cout << std::setw(20) << "Mean";
-	std::cout << std::setw(20) << "Max";
-	std::cout << std::setw(15) << "Samples";
-	std::cout << "\n";
-
+	// run the benchmarks
+	size_t progress = 0;
 	for (auto &bench : benchmarks)
 	{
-		context ctx(bench.run_duration);
-		bench.run(ctx);
+		auto bench_result = run_benchmark(bench);
+		results.push_back(bench_result);
 
-		std::cout << std::setw(maxw) << bench.name;
-		std::cout << std::setw(20) << format_string(ctx.min(), bench.target_unit);
-		std::cout << std::setw(20) << format_string(ctx.mean(), bench.target_unit);
-		std::cout << std::setw(20) << format_string(ctx.max(), bench.target_unit);
-		std::cout << std::setw(15) << ctx.sample_count();
-		std::cout << "\n";
+		// print the progress
+		std::cout << "\rRunning... " << create_status_bar((float)(++progress) / (float)(benchmarks.size()), 25);
+		std::flush(std::cout);
 	}
+	std::cout << "\r";
+
+	write_results(std::cout, results);
 
 	return 0;
 }

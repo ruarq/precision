@@ -22,7 +22,7 @@ auto context::running() -> bool
 	else
 	{
 		current_runtime += now - last;
-		samples.push_back(current_runtime);
+		samples.push_back(sample{current_runtime});
 		
 		auto total_runtime = now - start;
 		if (total_runtime < min_runtime)
@@ -38,24 +38,11 @@ auto context::running() -> bool
 	}
 }
 
-auto context::sample_count() const -> size_t
+auto context::result() -> benchmark_result
 {
-	return samples.size();
-}
-
-auto context::min() const -> duration
-{
-	return *std::min_element(samples.begin(), samples.end());
-}
-
-auto context::mean() const -> duration
-{
-	return average(samples.begin(), samples.end());
-}
-
-auto context::max() const -> duration
-{
-	return *std::max_element(samples.begin(), samples.end());
+	return {
+		.samples = this->samples
+	};
 }
 
 auto context::pause() -> void

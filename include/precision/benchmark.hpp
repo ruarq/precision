@@ -29,4 +29,7 @@ public:
 	unit target_unit = unit::ns;
 };
 
+auto run_benchmark(benchmark &bench) -> benchmark_result;
+auto run_empty_bench() -> benchmark_result;
+
 }

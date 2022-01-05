@@ -44,4 +44,24 @@ auto format_string(const duration &dur, const unit u) -> std::string
 	return result + " "s + to_string(u);
 }
 
+auto create_status_bar(const float progress, const int width) -> std::string
+{
+	std::string bar = "[";
+
+	const int filled = width * progress;
+
+	for (int i = 0; i < filled; ++i)
+	{
+		bar += "=";
+	}
+	bar += ">";
+
+	for (int i = 0; i < width - filled; ++i)
+	{
+		bar += " ";
+	}
+
+	return bar + "]";
+}
+
 }

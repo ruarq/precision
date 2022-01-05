@@ -12,6 +12,19 @@
 
 auto benchmarks = {
 	/**
+	 * empty
+	 */
+	precision::benchmark {
+		"empty",
+		[](auto &ctx) {
+			while (ctx.running())
+			{
+			}
+		}
+	}
+	.time(std::chrono::seconds(1)),
+
+	/**
 	 * vector-sort
 	 */
 	precision::benchmark {

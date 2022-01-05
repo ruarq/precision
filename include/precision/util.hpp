@@ -36,4 +36,6 @@ auto dont_optimize(T& value) -> void
 
 auto format_string(const duration &dur, const unit u) -> std::string;
 
+auto create_status_bar(const float progress, const int width) -> std::string;
+
 }

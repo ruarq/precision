@@ -9,6 +9,7 @@
 
 #include "util.hpp"
 #include "clock.hpp"
+#include "benchmark_result.hpp"
 
 namespace precision
 {
@@ -25,24 +26,9 @@ public:
 	auto running() -> bool;
 
 	/**
-	 * @brief get the sample count of the benchmark
+	 * @brief get the result of the benchmark the context belongs to
 	 */
-	auto sample_count() const -> size_t;
-
-	/**
-	 * @brief get the minimum sample
-	 */
-	auto min() const -> duration;
-
-	/**
-	 * @brief get the mean sample
-	 */
-	auto mean() const -> duration;
-
-	/**
-	 * @brief get the maximum sample
-	 */
-	auto max() const -> duration;
+	auto result() -> benchmark_result;
 
 	/**
 	 * @brief pause timing
@@ -56,7 +42,7 @@ public:
 
 private:
 	bool first_run = true;
-	std::vector<duration> samples;
+	std::vector<sample> samples;
 	clock::time_point last, start;
 	duration current_runtime;
 	duration min_runtime;

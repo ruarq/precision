@@ -21,4 +21,23 @@ auto benchmark::precision(const unit u) -> benchmark&
 	return *this;
 }
 
+auto run_benchmark(benchmark &bench) -> benchmark_result
+{
+	context ctx(bench.run_duration);
+	bench.run(ctx);
+	return ctx.result();
+}
+
+auto run_empty_bench() -> benchmark_result
+{
+	benchmark empty{
+		"empty",
+		[](auto &ctx) {
+			while (ctx.running());
+		}
+	};
+
+	return run_benchmark(empty);
+}
+
 }
