@@ -1,5 +1,7 @@
 #include "precision/main.hpp"
 
+#include "help.hpp"
+
 namespace precision
 {
 
@@ -8,12 +10,14 @@ auto main(std::vector<benchmark> benchmarks, const int argc, char **argv) -> int
 	const option long_options[] = {
 		{ "time",		required_argument,	nullptr, 't' },
 		{ "precision",	required_argument,	nullptr, 'p' },
+		{ "unit",		required_argument,	nullptr, 'u' },
+		{ "help",		no_argument,		nullptr, 'h' },
 		{ nullptr,		0,					nullptr,  0  }
 	};
 
 	int opt;
 	int long_opt_index;
-	while ((opt = getopt_long(argc, argv, "t:p:", long_options, &long_opt_index)) != -1)
+	while ((opt = getopt_long(argc, argv, "t:p:u:h", long_options, &long_opt_index)) != -1)
 	{
 		switch (opt)
 		{
@@ -24,11 +28,6 @@ auto main(std::vector<benchmark> benchmarks, const int argc, char **argv) -> int
 
 				for (auto &bench : benchmarks)
 				{
-					if (bench.custom_time)
-					{
-						continue;
-					}
-
 					switch (unit)
 					{
 						case unit::ns:
@@ -66,22 +65,20 @@ auto main(std::vector<benchmark> benchmarks, const int argc, char **argv) -> int
 			}
 			break;
 
+			case 'u':
 			case 'p':
 			{
 				auto unit = from_string(optarg);
 				for (auto &bench : benchmarks)
 				{
-					if (!bench.custom_precision)
-					{
-						bench.precision(unit);
-					}
+					bench.precision(unit);
 				}
 			}
 			break;
 
 			case 'h':
 			default:
-				// TODO(ruarq): print help stuff
+				std::cout << "usage: " << argv[0] << " [options]\n" << help;
 				return 1;
 		}
 	}
