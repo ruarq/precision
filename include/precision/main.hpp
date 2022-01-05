@@ -13,6 +13,6 @@
 namespace precision
 {
 
-auto main(std::vector<benchmark> benchmarks, const int argc, char **argv) -> int;
+auto main(std::vector<benchmark> benchmarks, const int argc = 0, char **argv = nullptr) -> int;
 
 }
