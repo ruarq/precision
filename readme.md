@@ -1,5 +1,5 @@
 # precision
-precision is a microbenchmarking library for C++17 and above.
+precision is a microbenchmarking library for C++17 and above with as little overhead as possible.
 
 # How to use it
 You can always look into the `example/` folder to get an example, I'm using it to test the API of the library.
