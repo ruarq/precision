@@ -13,7 +13,7 @@ IMPORTANT!
 			Examples: s, ns, min
 
 	-t, --time
-			Change the runtime of the individual benchmarks.
+			Change the runtime of all the individual benchmarks.
 			The argument has to be in the format {number}{unit}.
 			Examples: 10s, 500us, 1h, 5min
 )";
