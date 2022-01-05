@@ -31,15 +31,18 @@ auto main(std::vector<benchmark> benchmarks, const int argc, char **argv) -> int
 					switch (unit)
 					{
 						case unit::ns:
-							bench.time(std::chrono::nanoseconds(int64_t(time)));
+							bench.time(std::chrono::duration_cast<precision::duration>(
+								std::chrono::duration<float, std::nano>(time)));
 							break;
 
 						case unit::us:
-							bench.time(std::chrono::microseconds(int64_t(time)));
+							bench.time(std::chrono::duration_cast<precision::duration>(
+								std::chrono::duration<float, std::micro>(time)));
 							break;
 
 						case unit::ms:
-							bench.time(std::chrono::milliseconds(int64_t(time)));
+							bench.time(std::chrono::duration_cast<precision::duration>(
+								std::chrono::duration<float, std::milli>(time)));
 							break;
 
 						case unit::s:
@@ -79,7 +82,7 @@ auto main(std::vector<benchmark> benchmarks, const int argc, char **argv) -> int
 			case 'h':
 			default:
 				std::cout << "usage: " << argv[0] << " [options]\n" << help;
-				return 1;
+				return opt != 'h';
 		}
 	}
 
