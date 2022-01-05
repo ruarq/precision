@@ -24,11 +24,19 @@ auto write_results(std::ostream &out, const std::vector<benchmark_result> &resul
 	{
 		if (result.samples.size() != 0)
 		{
+			// calculate average
+			auto avg = std::chrono::nanoseconds(0);
+			for (auto &sample : result.samples)
+			{
+				avg += sample.dur;
+			}
+			avg /= result.samples.size();
+
 			out << std::setw(maxw) << result.name;
 			out << std::setw(20) << format_string(std::min_element(result.samples.begin(), result.samples.end())->dur, result.target_unit);
-			// out << std::setw(20) << format_string(ctx.mean(), bench.target_unit);
-			// out << std::setw(20) << format_string(ctx.max(), bench.target_unit);
-			// out << std::setw(15) << ctx.sample_count();
+			out << std::setw(20) << format_string(avg, result.target_unit);
+			out << std::setw(20) << format_string(std::max_element(result.samples.begin(), result.samples.end())->dur, result.target_unit);
+			out << std::setw(15) << result.samples.size();
 			out << "\n";
 		}
 	}

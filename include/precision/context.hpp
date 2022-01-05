@@ -28,7 +28,7 @@ public:
 	/**
 	 * @brief get the result of the benchmark the context belongs to
 	 */
-	auto result() -> benchmark_result;
+	auto get_samples() -> std::vector<sample>;
 
 	/**
 	 * @brief pause timing

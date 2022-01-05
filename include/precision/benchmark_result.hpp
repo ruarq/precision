@@ -18,8 +18,8 @@ class benchmark_result final
 {
 public:
 	std::string name;
-	std::vector<sample> samples;
 	unit target_unit;
+	std::vector<sample> samples;
 };
 
 auto write_results(std::ostream &out, const std::vector<benchmark_result> &results) -> void;

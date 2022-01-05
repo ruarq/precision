@@ -10,20 +10,6 @@
 namespace precision
 {
 
-template<typename Iter>
-auto average(Iter begin, Iter end)
-{
-	auto sum = *begin;
-	auto size = std::distance(begin, end);
-
-	for (; begin != end; ++begin)
-	{
-		sum += *begin;
-	}
-
-	return sum / size;
-}
-
 template <class T>
 auto dont_optimize(T& value) -> void
 {
@@ -36,6 +22,6 @@ auto dont_optimize(T& value) -> void
 
 auto format_string(const duration &dur, const unit u) -> std::string;
 
-auto create_status_bar(const float progress, const int width) -> std::string;
+auto create_status_bar(const float progress, int width) -> std::string;
 
 }

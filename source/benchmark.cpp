@@ -25,7 +25,13 @@ auto run_benchmark(benchmark &bench) -> benchmark_result
 {
 	context ctx(bench.run_duration);
 	bench.run(ctx);
-	return ctx.result();
+
+	auto samples = ctx.get_samples();
+	return {
+		.name = bench.name,
+		.target_unit = bench.target_unit,
+		.samples = samples
+	};
 }
 
 auto run_empty_bench() -> benchmark_result

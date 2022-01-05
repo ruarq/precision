@@ -38,11 +38,9 @@ auto context::running() -> bool
 	}
 }
 
-auto context::result() -> benchmark_result
+auto context::get_samples() -> std::vector<sample>
 {
-	return {
-		.samples = this->samples
-	};
+	return samples;
 }
 
 auto context::pause() -> void

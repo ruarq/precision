@@ -96,13 +96,16 @@ auto main(std::vector<benchmark> benchmarks, const int argc, char **argv) -> int
 
 	// run the benchmarks
 	size_t progress = 0;
+	// print the progress
+	std::cout << "\rRunning... " << create_status_bar((float)(progress) / (float)(benchmarks.size()), 80 - 12);
+	std::flush(std::cout);
 	for (auto &bench : benchmarks)
 	{
 		auto bench_result = run_benchmark(bench);
 		results.push_back(bench_result);
 
 		// print the progress
-		std::cout << "\rRunning... " << create_status_bar((float)(++progress) / (float)(benchmarks.size()), 25);
+		std::cout << "\rRunning... " << create_status_bar((float)(++progress) / (float)(benchmarks.size()), 80 - 12);
 		std::flush(std::cout);
 	}
 	std::cout << "\r";
