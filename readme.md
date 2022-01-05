@@ -15,6 +15,7 @@ precision::benchmark vector_insert {
 		std::vector<int> v;
 
 		// this loop should contain everything which you want to benchmark
+		// it will run until enough samples are obtained
 		while (ctx.running())
 		{
 			// in this case let's test how fast it is to insert a element into a std::vector
