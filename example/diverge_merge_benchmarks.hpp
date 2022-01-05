@@ -1,21 +1,16 @@
-#include <vector>
-#include <list>
-#include <deque>
-#include <forward_list>
-#include <array>
-#include <algorithm>
+#pragma once
 
 #include <precision/precision.hpp>
 
+#include "diverge_merge_v1.1.hpp"
 #include "config.hpp"
-#include "diverge_merge_benchmarks.hpp"
 
-auto std_sort_benchmarks = {
+static auto diverge_merge_benchmarks = {
 	/**
-	 * vector-sort
+	 * vector-dm
 	 */
 	precision::benchmark {
-		"vector-sort",
+		"vector-dm",
 		[](auto &ctx) {
 			std::srand(std::time(nullptr));
 
@@ -29,16 +24,16 @@ auto std_sort_benchmarks = {
 				}
 				ctx.resume();
 
-				std::sort(v.begin(), v.end());
+				diverge_merge_sort_v1_1(v.begin(), v.end());
 			}
 		}
 	},
 
 	/**
-	 * list-sort
+	 * list-dm
 	 */
 	precision::benchmark {
-		"list-sort",
+		"list-dm",
 		[](auto &ctx) {
 			std::srand(std::time(nullptr));
 
@@ -52,16 +47,16 @@ auto std_sort_benchmarks = {
 				}
 				ctx.resume();
 
-				l.sort();
+				diverge_merge_sort_v1_1(l.begin(), l.end());
 			}
 		}
 	},
 
 	/**
-	 * deque-sort
+	 * deque-dm
 	 */
 	precision::benchmark {
-		"deque-sort",
+		"deque-dm",
 		[](auto &ctx) {
 			std::srand(std::time(nullptr));
 
@@ -75,16 +70,16 @@ auto std_sort_benchmarks = {
 				}
 				ctx.resume();
 
-				std::sort(d.begin(), d.end());
+				diverge_merge_sort_v1_1(d.begin(), d.end());
 			}
 		}
 	},
 
 	/**
-	 * forward-list-sort
+	 * forward-list-dm
 	 */
 	precision::benchmark {
-		"forward-list-sort",
+		"forward-list-dm",
 		[](auto &ctx) {
 			std::srand(std::time(nullptr));
 
@@ -98,36 +93,8 @@ auto std_sort_benchmarks = {
 				}
 				ctx.resume();
 
-				fl.sort();
-			}
-		}
-	},
-
-	/**
-	 * array-sort
-	 */
-	precision::benchmark {
-		"array-sort",
-		[](auto &ctx) {
-			std::srand(std::time(nullptr));
-
-			while (ctx.running())
-			{
-				ctx.pause();
-				std::array<int, ELEMENT_COUNT> a;
-				for (int &i : a)
-				{
-					i = std::rand() % (ELEMENT_MAX_VALUE + 1);
-				}
-				ctx.resume();
-
-				std::sort(a.begin(), a.end());
+				diverge_merge_sort_v1_1(fl.begin(), fl.end());
 			}
 		}
 	}
 };
-
-auto main(int argc, char **argv) -> int
-{
-	return precision::main(argc, argv, std_sort_benchmarks, diverge_merge_benchmarks);
-}
