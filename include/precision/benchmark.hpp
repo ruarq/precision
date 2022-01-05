@@ -10,8 +10,6 @@
 namespace precision
 {
 
-static constexpr auto default_runtime = std::chrono::seconds(1);
-
 class benchmark final
 {
 public:
@@ -27,7 +25,7 @@ public:
 public:
 	const std::string name;
 	function run;
-	duration run_duration = default_runtime;
+	duration run_duration = std::chrono::seconds(1);
 	unit target_unit = unit::ns;
 };
 
