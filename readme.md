@@ -27,9 +27,9 @@ precision::benchmark vector_insert {
 
 The easiest way to get a result for that benchmark, is to pass it over to the `precision::main` function:
 ```cpp
-int main()
+int main(int argc, char **argv)
 {
-	return preicision::main({ vector_insert });
+	return preicision::main(argc, argv, { vector_insert });
 }
 ```
 
@@ -48,7 +48,7 @@ auto benchmarks = {
 };
 ```
 
-and now just pass them to `precision::main()`:
+and now just pass them to `precision::main`:
 ```cpp
 int main(int argc, char **argv)
 {
