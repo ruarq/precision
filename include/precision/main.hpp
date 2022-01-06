@@ -141,6 +141,10 @@ auto main(const int argc, char **argv, Conts&&... conts) -> int
 	}
 	std::cout << "\r";
 
+	std::sort(results.begin(), results.end(), [](const auto &a, const auto &b)
+	{
+		return a.samples.size() > b.samples.size();
+	});
 	write_results_pretty(std::cout, results);
 
 	return 0;
