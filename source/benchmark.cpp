@@ -5,7 +5,7 @@ namespace precision
 
 benchmark::benchmark(const std::string &name, function run)
 	: name(name)
-	, run(run)
+	, bench_fn(run)
 {
 }
 

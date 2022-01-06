@@ -6,7 +6,7 @@ namespace precision
 auto run_benchmark(benchmark &bench) -> benchmark_result
 {
 	context ctx(bench.run_duration);
-	bench.run(ctx);
+	bench.bench_fn(ctx);
 
 	auto samples = ctx.get_samples();
 	return {
