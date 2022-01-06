@@ -50,8 +50,8 @@ auto benchmarks = {
 
 and now just pass them to `precision::main()`:
 ```cpp
-int main()
+int main(int argc, char **argv)
 {
-	return precision::main(benchmarks);
+	return precision::main(argc, argv, benchmarks);
 }
 ```
