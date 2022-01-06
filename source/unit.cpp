@@ -31,7 +31,7 @@ auto from_string(const std::string &s) -> unit
 	}
 	else
 	{
-		throw std::invalid_argument("precision::from_chars() : string is not a unit");
+		return unit::none;
 	}
 }
 

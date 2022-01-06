@@ -17,6 +17,10 @@ namespace precision
 class context final
 {
 public:
+	/**
+	 * @brief how long the context should run the bench_fn
+	 * @param min_runtime the run duration
+	 */
 	context(const duration &min_runtime);
 
 public:

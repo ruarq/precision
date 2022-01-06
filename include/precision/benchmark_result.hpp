@@ -22,6 +22,11 @@ public:
 	std::vector<sample> samples;
 };
 
-auto write_results(std::ostream &out, const std::vector<benchmark_result> &results) -> void;
+/**
+ * @brief write the benchmark results to out
+ * @param out the std::ostream& to write the results to
+ * @param results the benchmark results
+ */
+auto write_results_pretty(std::ostream &out, const std::vector<benchmark_result> &results) -> void;
 
 }

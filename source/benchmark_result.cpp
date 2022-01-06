@@ -3,7 +3,7 @@
 namespace precision
 {
 
-auto write_results(std::ostream &out, const std::vector<benchmark_result> &results) -> void
+auto write_results_pretty(std::ostream &out, const std::vector<benchmark_result> &results) -> void
 {
 	// find the benchmark with the longest name
 	auto maxw = std::max_element(results.begin(), results.end(), [](const auto &a, const auto &b)
